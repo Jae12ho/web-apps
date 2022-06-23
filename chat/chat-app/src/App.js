@@ -5,7 +5,7 @@ import ChatRoom from "./components/ChatRoom";
 
 function App() {
   const prevNickname = useRef(null);
-  const [nickname, setNickname] = useState("닉네임");
+  const [nickname, setNickname] = useState("낯선사람");
   
   const handleSubmitNickname = useCallback(newNickname => {
     prevNickname.current = nickname;
