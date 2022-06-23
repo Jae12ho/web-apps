@@ -5,17 +5,13 @@ const UserCount = () => {
   const socket = useContext(SocketContext);
   const [userCount, setUserCount] = useState(0);
 
-  const handleUserCount = (res) => {
-    setUserCount(res.userCount);
-  }
-
   useEffect(() => {
-    socket.on(SOCKET_EVENT.RECEIVE, handleUserCount);
+    socket.on(SOCKET_EVENT.RECEIVE, res => setUserCount(res.userCount));
 
     return () => {
-      socket.off(SOCKET_EVENT.RECEIVE, handleUserCount);
+      socket.off(SOCKET_EVENT.RECEIVE, res => setUserCount(res.userCount));
     };
-  }, [socket, handleUserCount]);
+  }, [socket]);
 
   return (
     <div>현재 {userCount}명</div>

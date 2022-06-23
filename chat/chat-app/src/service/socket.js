@@ -7,6 +7,7 @@ export const SOCKET_EVENT = {
     UPDATE_NICKNAME: "UPDATE_NICKNAME",
     SEND: "SEND",
     RECEIVE: "RECEIVE",
+    QUIT: "QUIT",
 };
 
 export const socket = socketIo(String(process.env.REACT_APP_BACK_URL), { withCredentials: true });
@@ -28,7 +29,7 @@ export const makeMessage = pongData => {
 
     switch (type) {
         case SOCKET_EVENT.JOIN: {
-            contentLabel = `'${nickname}'님이 채팅에 들어오셨습니다.`;
+            contentLabel = `${nickname}이 채팅에 들어왔습니다.`;
             break;
         }
         case SOCKET_EVENT.UPDATE_NICKNAME: {
@@ -38,6 +39,10 @@ export const makeMessage = pongData => {
         case SOCKET_EVENT.SEND: {
             contentLabel = String(content);
             nicknameLabel = nickname;
+            break;
+        }
+        case SOCKET_EVENT.QUIT: {
+            contentLabel = `누군가 퇴장했습니다.`;
             break;
         }
         default:

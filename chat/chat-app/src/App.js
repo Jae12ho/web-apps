@@ -22,6 +22,10 @@ function App() {
     } else {
       socket.emit(SOCKET_EVENT.JOIN, { nickname });
     }
+    
+    return () => {
+      socket.emit(SOCKET_EVENT.QUIT, { nickname: nickname })
+    }
   }, [nickname]);
 
   return (

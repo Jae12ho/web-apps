@@ -3,6 +3,7 @@ const SOCKET_EVENT = {
     UPDATE_NICKNAME: "UPDATE_NICKNAME",
     SEND: "SEND",
     RECEIVE: "RECEIVE",
+    QUIT: "QUIT",
 };
 
 module.exports = function(socketIo) {
@@ -18,6 +19,7 @@ module.exports = function(socketIo) {
         socket.on("disconnect", reason => {
             console.log(`disconnect: ${reason}`);
             userCount--;
+            socketIo.to(roomName).emit(SOCKET_EVENT.RECEIVE, { type: SOCKET_EVENT.QUIT, userCount });
         });
 
         
